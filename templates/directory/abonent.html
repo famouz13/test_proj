@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block stitle %}Контакт{% endblock stitle %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container p-5">
+        <h2 class="mb-4" id="uuid">{{ contact.id }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex flex-column">
+                <input type="hidden" name="id" value="{{ contact.id }}">
+                {{ form }}
+                <div class="container row">
+                    <input class="btn btn-warning mr-5" value="Изменить" type="submit">
+                    <a id="deleteBtn" href="{% url 'contact_delete' id=contact.id %}" class="btn btn-danger">Удалить</a>
+                </div>
+            </div>
+        </form>
+        <div class="row justify-content-center p-3">
+            <a class="btn btn-primary" href="{% url 'contacts' %}">На главную</a>
+        </div>
+    </div>
+{% endblock content %}
+

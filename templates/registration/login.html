@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block stitle %}Вход{% endblock stitle %}
+
+
+{% block content %}
+    <div class="row justify-content-center align-items-center">
+        <form method="POST" class="form form-group">
+            {% csrf_token %}
+            <input placeholder="Login" name='login' type="text" class="form-control">
+            <input placeholder="Password" type="password" name="password1" class="form-control">
+            <input placeholder="Repeat password" type="password" name="password2" class="form-control">
+            <button class="btn btn-primary" type="submit">Если уверен, жми</button>
+        </form>
+    </div>
+{% endblock content %}

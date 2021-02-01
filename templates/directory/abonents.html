@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block stitle %}Контакты{% endblock stitle %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container p-5">
+        <ul class="d-flex justify-content-start flex-wrap">
+            {% for contact in contacts %}
+                <a href="{% url 'contact' id=contact.id %}" class="card bg-light m-3 text-decoration-none" style="max-width: 18rem;">
+                    <div class="card-header text-dark">Contact #{{ contact.id }}</div>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">Name: {{ contact.first_name }} {{ contact.second_name }}</h5>
+                        <p class="card-text text-dark">Address: {{ contact.address }}</p>
+                        <p class="card-text text-dark">Phone: {{ contact.phone_number }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </ul>
+        <div class="row mb-4 justify-content-between mt-5">
+            <form method="GET" class="w-100">
+                <div class="form-group">
+                    <input id="searchInput" type="text" class="form-control w-100" placeholder="Имя или телефон"
+                           name="key">
+                    <input id="searchBtn" type="submit" class="btn btn-dark w-50" value="Найти">
+                    <a href="/contacts" class="btn btn-light w-50">Сброс</a>
+                </div>
+            </form>
+        </div>
+        <h4>Нажмите на абонента, чтобы изменить или удалить</h4>
+        <a href="/contacts/add" class="btn btn-primary">Добавить</a>
+    </div>
+{% endblock content %}
+
+
